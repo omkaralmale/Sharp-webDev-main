@@ -1,32 +1,40 @@
-// all required element and links
-const link = "https://crudcrud.com/api/b408b1a0fc9f4a4bbd447f5eed27c93c";
-const url = `${link}/services`;
-const price = document.querySelector("#price");
-const productName = document.querySelector("#productName");
-const form = document.querySelector("#form");
-const search = document.querySelector(".d-flex");
-const outputList = document.querySelector("#output");
-const lists = document.getElementsByTagName("li");
+const apiUrl = "https://crudcrud.com/api/50454d2ffb464f5a891c038ef4dd5c3d";
+const servicesUrl = `${apiUrl}/services`;
 
-//adding event listeners for search item in output list
-search.addEventListener("keyup", (e) => {
-  const sText = e.target.value;
-  Array.from(lists).forEach((item) => {
-    let itemText = item.firstChild.textContent;
-    if (itemText.indexOf(sText) != -1) {
+const priceInput = document.querySelector("#price");
+const productNameInput = document.querySelector("#productName");
+const form = document.querySelector("#form");
+const searchInput = document.querySelector(".d-flex");
+const outputList = document.querySelector("#output");
+const sumOutput = document.querySelector("#Sum");
+
+// Event Listeners
+searchInput.addEventListener("keyup", handleSearch);
+form.addEventListener("submit", handleFormSubmit);
+outputList.addEventListener("click", handleOutputClick);
+
+// first time load all products
+getProducts();
+
+// Search Functionality
+function handleSearch(e) {
+  const searchText = e.target.value.toLowerCase();
+  const productItems = Array.from(outputList.querySelectorAll("li"));
+  productItems.forEach((item) => {
+    const itemName = item.firstChild.textContent.toLowerCase();
+    if (itemName.includes(searchText)) {
       item.style.display = "block";
     } else {
       item.style.display = "none";
     }
   });
-});
+}
 
-//adding to object  and sent to post axios request
-form.addEventListener("submit", (e) => {
+// Add the product
+async function handleFormSubmit(e) {
   e.preventDefault();
-
-  const priceValue = price.value;
-  const productNameValue = productName.value;
+  const priceValue = priceInput.value;
+  const productNameValue = productNameInput.value;
 
   if (priceValue === "" || productNameValue === "") {
     alert("Please fill in all fields");
@@ -36,36 +44,37 @@ form.addEventListener("submit", (e) => {
       productName: productNameValue,
     };
 
-    postAxios(productObj);
+    await postProduct(productObj);
+    form.reset();
   }
-  form.reset();
-});
+}
 
-//edit functionality  product
-outputList.addEventListener("click", (e) => {
+//edit product
+async function handleOutputClick(e) {
   if (e.target.classList.contains("edit")) {
-    const text = e.target.parentElement.firstChild.textContent.split("_");
-    price.value = text[1].split(".")[1];
-    productName.value = text[0];
-    console.log(text);
+    const productId = e.target.parentElement.getAttribute("user_id");
+    const [productName, price] =
+      e.target.parentElement.firstChild.textContent.split("_");
+    priceInput.value = price.trim().split("Rs.")[1];
+    productNameInput.value = productName.trim();
+    await deleteProduct(productId);
   }
-});
+}
 
-//sending data to api
-async function postAxios(productObj) {
+//save on axios
+async function postProduct(productObj) {
   try {
-    const response = await axios.post(url, productObj);
-    console.log(response.data);
-    getAxios();
+    const response = await axios.post(servicesUrl, productObj);
+    getProducts();
   } catch (error) {
     console.log(error);
   }
 }
 
-//getting data from api
-async function getAxios() {
+// get requested products
+async function getProducts() {
   try {
-    const response = await axios.get(url);
+    const response = await axios.get(servicesUrl);
     const products = response.data;
     displayProducts(products);
     calculateAndDisplaySum(products);
@@ -74,40 +83,37 @@ async function getAxios() {
   }
 }
 
-//delete dat from api
-async function deleteAxios(productId) {
+//delete products
+async function deleteProduct(productId) {
   try {
-    const deleteUrl = `${url}/${productId}`;
+    const deleteUrl = `${servicesUrl}/${productId}`;
     const response = await axios.delete(deleteUrl);
-    console.log(response.data);
-    getAxios();
+    getProducts();
   } catch (error) {
     console.log(error);
   }
 }
 
-// adding product and price in html
+// display on screen
 function displayProducts(products) {
   outputList.innerHTML = "";
 
   products.forEach((product) => {
     const li = document.createElement("li");
     li.classList.add("list-group-item");
-    li.innerHTML = `${product.productName} _ Rs.${product.price}<button class="btn btn-outline-danger btn-sm float-end" onclick="deleteAxios('${product._id}')">Delete</button><button class="btn btn-outline-warning btn-sm float-end edit">Edit</button>
-        `;
+    li.setAttribute("user_id", product._id);
+    li.innerHTML = `${product.productName} _ Rs.${product.price}
+      <button class="btn btn-outline-danger btn-sm float-end" onclick="deleteProduct('${product._id}')">Delete</button>
+      <button class="btn btn-outline-warning btn-sm float-end edit">Edit</button>`;
     outputList.appendChild(li);
   });
 }
 
-//calculating the total of products price
+// sum calculation
 function calculateAndDisplaySum(products) {
-  let sum = 0;
-  const outputList = document.querySelector("#Sum");
-  products.forEach((product) => {
-    sum += parseInt(product.price);
-  });
-  outputList.innerHTML = `Rs : ${sum}`;
+  const sum = products.reduce(
+    (total, product) => total + parseInt(product.price),
+    0
+  );
+  sumOutput.innerHTML = `Rs: ${sum}`;
 }
-
-//get data first time in display from api
-getAxios();
