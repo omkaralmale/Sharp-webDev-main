@@ -1,5 +1,7 @@
-const apiUrl = "https://crudcrud.com/api/50454d2ffb464f5a891c038ef4dd5c3d";
+const apiUrl = "https://crudcrud.com/api/7252425eb61e4097a48d8864ff72a1a2";
 const servicesUrl = `${apiUrl}/services`;
+let editFunction = false;
+let productIdEdit = null;
 
 const priceInput = document.querySelector("#price");
 const productNameInput = document.querySelector("#productName");
@@ -15,7 +17,6 @@ outputList.addEventListener("click", handleOutputClick);
 
 // first time load all products
 getProducts();
-
 // Search Functionality
 function handleSearch(e) {
   const searchText = e.target.value.toLowerCase();
@@ -29,8 +30,7 @@ function handleSearch(e) {
     }
   });
 }
-
-// Add the product
+// Add the product form
 async function handleFormSubmit(e) {
   e.preventDefault();
   const priceValue = priceInput.value;
@@ -44,12 +44,15 @@ async function handleFormSubmit(e) {
       productName: productNameValue,
     };
 
-    await postProduct(productObj);
+    if (editFunction) {
+      await putFunction(productObj, editFunction, productIdEdit);
+    } else {
+      await postProduct(productObj);
+    }
     form.reset();
   }
 }
-
-//edit product
+//edit product click
 async function handleOutputClick(e) {
   if (e.target.classList.contains("edit")) {
     const productId = e.target.parentElement.getAttribute("user_id");
@@ -57,11 +60,25 @@ async function handleOutputClick(e) {
       e.target.parentElement.firstChild.textContent.split("_");
     priceInput.value = price.trim().split("Rs.")[1];
     productNameInput.value = productName.trim();
-    await deleteProduct(productId);
+    editFunction = true;
+    productIdEdit = productId;
   }
 }
-
-//save on axios
+// edit product api request
+async function putFunction(productObj, editFunction, productIdEdit) {
+  try {
+    const response = await axios.put(
+      `${servicesUrl}/${productIdEdit}`,
+      productObj
+    );
+    getProducts();
+    editFunction = false;
+    productIdEdit = null;
+  } catch (error) {
+    console.log(error);
+  }
+}
+//post on axios
 async function postProduct(productObj) {
   try {
     const response = await axios.post(servicesUrl, productObj);
@@ -70,8 +87,7 @@ async function postProduct(productObj) {
     console.log(error);
   }
 }
-
-// get requested products
+// get request products
 async function getProducts() {
   try {
     const response = await axios.get(servicesUrl);
@@ -82,7 +98,6 @@ async function getProducts() {
     console.log(error);
   }
 }
-
 //delete products
 async function deleteProduct(productId) {
   try {
@@ -93,7 +108,6 @@ async function deleteProduct(productId) {
     console.log(error);
   }
 }
-
 // display on screen
 function displayProducts(products) {
   outputList.innerHTML = "";
@@ -108,7 +122,6 @@ function displayProducts(products) {
     outputList.appendChild(li);
   });
 }
-
 // sum calculation
 function calculateAndDisplaySum(products) {
   const sum = products.reduce(
