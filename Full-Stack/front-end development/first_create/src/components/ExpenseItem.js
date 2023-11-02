@@ -1,11 +1,17 @@
-function ExpenseItem() {
+import "./ExpenseItem.css";
+import React from "react";
+
+function ExpenseItem(props) {
   return (
-    <>
-      <h2>Expense_Item !</h2>
-      <h4>Food Rs 10</h4>
-      <h4>Petrol Rs 100</h4>
-      <h4>Movies Rs 200</h4>
-    </>
+    <div className="box">
+      <div className="date">{props.date}</div>
+      <div className="content">
+        <h2>{props.name}</h2>
+        <h2>Rs {props.amount}</h2>
+        <p>{props.location}</p>
+      </div>
+    </div>
   );
 }
+
 export default ExpenseItem;
