@@ -1,17 +1,42 @@
+import { useState } from "react";
+
 const ExpenseForm = () => {
-  //create eventlistener to print value of title amount and date
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(e.target.title.value);
-    console.log(e.target.amount.value);
-    console.log(e.target.date.value);
+  const [enteredTitle, setEnteredTitle] = useState("");
+  const [enteredAmount, setEnteredAmount] = useState("");
+  const [enteredDate, setEnteredDate] = useState("");
+
+  const handleTitle = (e) => {
+    setEnteredTitle(e.target.title.value);
+  };
+
+  const handleAmount = (e) => {
+    setEnteredAmount(e.target.amount.value);
+  };
+
+  const handleDate = (e) => {
+    setEnteredDate(e.target.date.value);
   };
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="title" placeholder="Title" />
-        <input type="text" name="amount" placeholder="Amount" />
-        <input type="date" name="date" placeholder="Date" />
+      <form>
+        <input
+          type="text"
+          name="title"
+          placeholder="Title"
+          onChange={handleTitle}
+        />
+        <input
+          type="text"
+          name="amount"
+          placeholder="Amount"
+          onChange={handleAmount}
+        />
+        <input
+          type="date"
+          name="date"
+          placeholder="Date"
+          onChange={handleDate}
+        />
         <button type="submit">Add to Expense</button>
       </form>
     </>
