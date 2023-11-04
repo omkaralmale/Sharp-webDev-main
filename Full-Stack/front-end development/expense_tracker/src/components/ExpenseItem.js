@@ -18,10 +18,9 @@ const ExpenseItem = (props) => {
   return (
     <div className="container">
       {" "}
-      {/* Change class to className */}
       <div className="item">
         <ExpenseDate date={props.date} />
-        <h2 className="title-ex">{title}</h2> {/* Use state variable 'title' */}
+        <h2 className="title-ex">{title}</h2>
         <div className="expense">${amount}</div>
         <button onClick={clickEdit}>Edit</button>
         <button onClick={clickDelete}>Delete</button>

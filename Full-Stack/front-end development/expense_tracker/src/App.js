@@ -1,5 +1,6 @@
 import "./App.css";
 import ExpenseItem from "./components/ExpenseItem.js";
+import ExpenseForm from "./components/ExpenseForm.js";
 
 const App = () => {
   const expense = [
@@ -34,6 +35,7 @@ const App = () => {
   return (
     <>
       <h1>Hello I'm React</h1>
+      <ExpenseForm />
       <div className="outer">
         {expense.map((expense) => (
           <ExpenseItem
