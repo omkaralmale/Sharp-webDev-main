@@ -1,18 +1,28 @@
 import "./ExpenseItem..css";
+import React, { useState } from "react";
 import ExpenseDate from "./ExpeneseDate.js";
+
 const ExpenseItem = (props) => {
+  const [title, setTitle] = useState(props.title);
+  const [amount, setAmount] = useState(props.amount);
+
   const clickEdit = () => {
-    console.log("Edit");
+    setTitle("Updated");
+    setAmount("100");
   };
+
   const clickDelete = () => {
     console.log("Delete");
   };
+
   return (
-    <div class="container">
-      <div class="item">
+    <div className="container">
+      {" "}
+      {/* Change class to className */}
+      <div className="item">
         <ExpenseDate date={props.date} />
-        <h2 class="title-ex">{props.title}</h2>
-        <div class="expense">${props.amount}</div>
+        <h2 className="title-ex">{title}</h2> {/* Use state variable 'title' */}
+        <div className="expense">${amount}</div>
         <button onClick={clickEdit}>Edit</button>
         <button onClick={clickDelete}>Delete</button>
       </div>
