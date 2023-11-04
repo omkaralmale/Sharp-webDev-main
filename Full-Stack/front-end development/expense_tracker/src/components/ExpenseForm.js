@@ -1,45 +1,70 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 const ExpenseForm = () => {
+  // State variables for each input field
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
 
-  const handleTitle = (e) => {
-    setEnteredTitle(e.target.title.value);
+  const handleTitleChange = (event) => {
+    setEnteredTitle(event.target.value);
   };
 
-  const handleAmount = (e) => {
-    setEnteredAmount(e.target.amount.value);
+  const handleAmountChange = (event) => {
+    setEnteredAmount(event.target.value);
   };
 
-  const handleDate = (e) => {
-    setEnteredDate(e.target.date.value);
+  const handleDateChange = (event) => {
+    setEnteredDate(event.target.value);
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const expenseData = {
+      title: enteredTitle,
+      amount: parseFloat(enteredAmount),
+      date: new Date(enteredDate),
+    };
+
+    console.log(expenseData);
+
+    setEnteredTitle("");
+    setEnteredAmount("");
+    setEnteredDate("");
+  };
+
   return (
-    <>
-      <form>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="title">Title</label>
         <input
           type="text"
-          name="title"
-          placeholder="Title"
-          onChange={handleTitle}
+          id="title"
+          value={enteredTitle}
+          onChange={handleTitleChange}
         />
+      </div>
+      <div>
+        <label htmlFor="amount">Amount</label>
         <input
-          type="text"
-          name="amount"
-          placeholder="Amount"
-          onChange={handleAmount}
+          type="number"
+          id="amount"
+          value={enteredAmount}
+          onChange={handleAmountChange}
         />
+      </div>
+      <div>
+        <label htmlFor="date">Date</label>
         <input
           type="date"
-          name="date"
-          placeholder="Date"
-          onChange={handleDate}
+          id="date"
+          value={enteredDate}
+          onChange={handleDateChange}
         />
-        <button type="submit">Add to Expense</button>
-      </form>
-    </>
+      </div>
+      <button type="submit">Add Expense</button>
+    </form>
   );
 };
 
