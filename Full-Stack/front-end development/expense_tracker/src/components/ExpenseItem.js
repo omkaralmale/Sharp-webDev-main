@@ -1,30 +1,17 @@
-import "./ExpenseItem..css";
-import React, { useState } from "react";
-import ExpenseDate from "./ExpeneseDate.js";
+import React from "react";
+import ExpenseDate from "./ExpenseDate.js";
 
 const ExpenseItem = (props) => {
-  const [title, setTitle] = useState(props.title);
-  const [amount, setAmount] = useState(props.amount);
-
-  const clickEdit = () => {
-    setTitle("Updated");
-    setAmount("100");
-  };
-
-  const clickDelete = () => {
-    console.log("Delete");
-  };
-
   return (
-    <div className="container">
-      {" "}
-      <div className="item">
-        <ExpenseDate date={props.date} />
-        <h2 className="title-ex">{title}</h2>
-        <div className="expense">${amount}</div>
-        <button onClick={clickEdit}>Edit</button>
-        <button onClick={clickDelete}>Delete</button>
+    <div className="expense-item">
+      <ExpenseDate date={props.date} />
+      <div className="expense-item__description">
+        <h2>{props.title}</h2>
+        <div className="expense-item__price">${props.amount}</div>
       </div>
+      {/* Edit and Delete handlers can be implemented later */}
+      <button onClick={() => console.log("Edit")}>Edit</button>
+      <button onClick={() => console.log("Delete")}>Delete</button>
     </div>
   );
 };

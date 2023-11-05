@@ -39,6 +39,7 @@
 }
 
 input {
+  display: flex;
   border: 2px solid black;
   width: 200px;
   height: 30px;
@@ -53,7 +54,7 @@ input {
 form {
   display: flex;
   padding: 20px;
-  display: inline-block;
+  width: 100%;
 }
 
 @keyframes App-logo-spin {

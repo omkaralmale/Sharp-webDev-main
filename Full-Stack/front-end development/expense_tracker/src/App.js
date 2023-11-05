@@ -1,43 +1,30 @@
-import "./App.css";
+import React, { useState } from "react";
 import ExpenseItem from "./components/ExpenseItem.js";
 import ExpenseForm from "./components/ExpenseForm.js";
+import "./App.css";
 
 const App = () => {
-  const expense = [
+  const [expenses, setExpenses] = useState([
     {
+      id: "e1",
       title: "Groceries",
       amount: 50.0,
-      date: new Date(),
+      date: new Date(2021, 7, 14),
     },
-    {
-      title: "Gasoline",
-      amount: 30.25,
-      date: new Date(),
-    },
-    {
-      title: "Dinner with Friends",
-      amount: 75.5,
-      date: new Date(),
-    },
-    {
-      title: "Movie Tickets",
-      amount: 20.0,
-      date: new Date(), // Corrected property name here
-    },
-    {
-      title: "Utilities",
-      amount: 100.0,
-      date: new Date(),
-    },
-    // ... rest of the items
-  ];
+  ]);
+
+  const onAddExpense = (expense) => {
+    setExpenses((prevExpenses) => {
+      return [expense, ...prevExpenses];
+    });
+  };
 
   return (
     <>
-      <h1>Hello I'm React</h1>
-      <ExpenseForm />
+      <h1>Hello, I'm React</h1>
+      <ExpenseForm onAddExpense={onAddExpense} />
       <div className="outer">
-        {expense.map((expense) => (
+        {expenses.map((expense) => (
           <ExpenseItem
             key={expense.id}
             title={expense.title}

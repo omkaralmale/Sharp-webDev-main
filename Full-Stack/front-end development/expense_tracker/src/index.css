@@ -9,3 +9,7 @@ body {
 code {
   font-family: "Quicksand";
 }
+* {
+  margin: 5px;
+  padding: 5px;
+}
