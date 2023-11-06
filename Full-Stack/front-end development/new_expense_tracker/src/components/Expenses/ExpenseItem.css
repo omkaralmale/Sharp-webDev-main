@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+}
+body {
+  display: flex;
+  background-size: cover;
+  background: url("./images/DALL·E\ 2023-11-06\ 22.05.04\ -\ A\ professional\ and\ clean\ background\ for\ an\ expense\ tracker\ website\,\ featuring\ a\ sleek\ black\ calculator\ on\ the\ right\ side\,\ a\ closed\ navy\ blue\ diary\ lyi.png");
+}
+.exContainer {
+  padding: 2px;
+  width: 600px;
+  display: flex;
+  margin: 5px;
+  border: 1px solid rgb(218, 213, 213);
+  justify-content: space-between;
+  background: white;
+  border-radius: 50px;
+  -webkit-border-radius: 50px;
+  -moz-border-radius: 50px;
+  -ms-border-radius: 50px;
+  -o-border-radius: 50px;
+}
+div {
+  font-weight: 900;
+  margin: 3px;
+}
+#cost {
+  color: red;
+}
+
+#date {
+  padding: 0px 5px 0px 5px;
+  color: blue;
+}
+
+#card {
+  margin: 10px;
+  padding: 20px;
+  background: linear-gradient(white, rgba(255, 255, 255, 0.9));
+  box-shadow: 0 0 70px 90px rgba(255, 255, 255, 0.9);
+}
+button {
+  margin: 5px;
+  padding: 5px;
+}
+.outContainer {
+  display: flex;
+}
