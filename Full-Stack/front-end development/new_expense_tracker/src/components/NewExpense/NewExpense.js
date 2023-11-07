@@ -20,17 +20,15 @@ function NewExpense(props) {
   return (
     <div className="new-expense">
       {!isEditing && (
-        <button onClick={() => setIsEditing(true)}>Add new expense</button> //show the button is isEditing is false
+        <button onClick={() => setIsEditing(true)}>Add new expense</button>
       )}
 
-      {
-        isEditing && (
-          <ExpenseForm
-            onSaveExpenseData={saveExpenseDataHandler}
-            onCancel={stopEditingHandler}
-          />
-        ) //show the form if isEditing if true
-      }
+      {isEditing && (
+        <ExpenseForm
+          onSaveExpenseData={saveExpenseDataHandler}
+          onCancel={stopEditingHandler}
+        />
+      )}
     </div>
   );
 }
