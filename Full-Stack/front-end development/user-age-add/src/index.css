@@ -1,0 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: Quicksand;
+  background: #1f1f1f;
+  font-weight: bolder;
+}
+
+body {
+  margin: 0;
+}
