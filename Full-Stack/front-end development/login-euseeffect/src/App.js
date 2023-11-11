@@ -10,7 +10,7 @@ function App() {
 
   useEffect(() => {
     console.log("component is mounted");
-    if (storedUserLoggedInInfo === "1") {
+    if (storedUserLoggedInInfo === "YES") {
       setIsLoggedIn(true);
     }
 
@@ -20,12 +20,12 @@ function App() {
   }, []);
 
   const loginHandler = (email, password) => {
-    localStorage.setItem("isLoggedIn", "1");
+    localStorage.setItem("isLoggedIn", "YES");
     setIsLoggedIn(true);
   };
 
   const logoutHandler = () => {
-    localStorage.setItem("isLoggedIn", "0");
+    localStorage.setItem("isLoggedIn", "NO");
     setIsLoggedIn(false);
   };
 

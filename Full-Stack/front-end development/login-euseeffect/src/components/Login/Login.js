@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useReducer } from "react";
 
 import Card from "../UI/Card/Card";
@@ -15,7 +16,7 @@ function emailReducer(state, action) {
   return { value: "", isValid: false };
 }
 
-// password reducer function
+//! password reducer function
 function passwordReducer(state, action) {
   if (action.type === "USER_INPUT") {
     return { value: action.val, isValid: action.val.trim().length > 6 };
@@ -26,7 +27,7 @@ function passwordReducer(state, action) {
   return { value: "", isValid: false };
 }
 
-// college reducer function
+//! college reducer function
 function collegeReducer(state, action) {
   if (action.type === "USER_INPUT") {
     return { value: action.val, isValid: action.val.trim().length > 1 };
