@@ -26,6 +26,17 @@ function passwordReducer(state, action) {
   return { value: "", isValid: false };
 }
 
+// college reducer function
+function collegeReducer(state, action) {
+  if (action.type === "USER_INPUT") {
+    return { value: action.val, isValid: action.val.trim().length > 1 };
+  }
+  if (action.type === "INPUT_BLUR") {
+    return { value: state.value, isValid: state.value.trim().length > 1 };
+  }
+  return { value: "", isValid: false };
+}
+
 const Login = (props) => {
   const [formIsValid, setFormIsValid] = useState(false);
 
@@ -39,10 +50,21 @@ const Login = (props) => {
     inValid: false,
   });
 
+  const [collegeState, dispatchCollege] = useReducer(collegeReducer, {
+    value: "",
+    inValid: false,
+  });
+
   const emailChangeHandler = (event) => {
     // setEnteredEmail(event.target.value);
     dispatchEmail({ type: "USER_INPUT", val: event.target.value });
     setFormIsValid(emailState.isValid && passwordState.isValid);
+  };
+
+  const collegeChangeHandler = (event) => {
+    // setEnteredEmail(event.target.value);
+    dispatchCollege({ type: "USER_INPUT", val: event.target.value });
+    setFormIsValid(collegeState.isValid && passwordState.isValid);
   };
 
   const passwordChangeHandler = (event) => {
@@ -58,9 +80,13 @@ const Login = (props) => {
     dispatchEmail({ type: "INPUT_BLUR" });
   };
 
+  const validateCollegeHandler = () => {
+    dispatchEmail({ type: "INPUT_BLUR" });
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onLogin(emailState.value, passwordState.value);
+    props.onLogin(emailState.value, passwordState.value, collegeState.value);
   };
 
   return (
@@ -78,6 +104,20 @@ const Login = (props) => {
             value={emailState.value}
             onChange={emailChangeHandler}
             onBlur={validateEmailHandler}
+          />
+        </div>
+        <div
+          className={`${classes.control} ${
+            collegeState.isValid === false ? classes.invalid : ""
+          }`}
+        >
+          <label htmlFor="college">College Name</label>
+          <input
+            type="text"
+            id="college"
+            value={collegeState.value}
+            onChange={collegeChangeHandler}
+            onBlur={validateCollegeHandler}
           />
         </div>
         <div

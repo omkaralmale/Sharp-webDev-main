@@ -55,10 +55,10 @@ function AddUser(props) {
         <form onSubmit={addUserHandler}>
           <label htmlFor="username">Username</label>
           <input id="username" type="text" ref={nameInputRef} />
+          <label htmlFor="collegeName">College Name</label>
+          <input id="collegeName" type="text" ref={collegeNameRef} />
           <label htmlFor="age">Age (Years)</label>
           <input id="age" type="number" ref={ageInputRef} />
-          <label htmlFor="collegeName">Age (Years)</label>
-          <input id="collegeName" type="text" ref={collegeNameRef} />
           <Button type="submit">Add User</Button>
         </form>
       </Card>
