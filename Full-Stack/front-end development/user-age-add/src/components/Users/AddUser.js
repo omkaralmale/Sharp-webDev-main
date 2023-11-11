@@ -9,6 +9,7 @@ function AddUser(props) {
 
   const nameInputRef = useRef();
   const ageInputRef = useRef();
+  const collegeNameRef = useRef();
 
   function errorHandler() {
     setError(null);
@@ -19,11 +20,12 @@ function AddUser(props) {
 
     const enteredName = nameInputRef.current.value;
     const enteredUserAge = ageInputRef.current.value;
+    const collegeName = collegeNameRef.current.value;
 
     if (enteredName.trim().length === 0 || enteredUserAge.trim().length === 0) {
       setError({
         title: "Invalid Input!",
-        message: "Please enter a valid name and age (non-empty) values.",
+        message: "Please enter (non-empty) values.",
       });
       return;
     }
@@ -34,9 +36,10 @@ function AddUser(props) {
       });
       return;
     }
-    props.onAddUser(enteredName, enteredUserAge);
+    props.onAddUser(enteredName, enteredUserAge, collegeName);
     nameInputRef.current.value = "";
     ageInputRef.current.value = "";
+    collegeNameRef.current.value = "";
   }
 
   return (
@@ -54,6 +57,8 @@ function AddUser(props) {
           <input id="username" type="text" ref={nameInputRef} />
           <label htmlFor="age">Age (Years)</label>
           <input id="age" type="number" ref={ageInputRef} />
+          <label htmlFor="collegeName">Age (Years)</label>
+          <input id="collegeName" type="text" ref={collegeNameRef} />
           <Button type="submit">Add User</Button>
         </form>
       </Card>
