@@ -1,46 +1,26 @@
-import React, { useContext } from "react";
+/* eslint-disable no-unused-vars */
+import React from "react";
 import classes from "./Cart.module.css";
-import Modal from "../UI/Modal";
-import CartContext from "../../store/cart-context";
-import CartItem from "./CartItem";
+import Modal from "../UI/Modal.js";
 
 export default function Cart(props) {
-  const cartCtx = useContext(CartContext);
-  const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
-  const hasItems = cartCtx.items.length > 0;
+  const cartItems = [
+    { id: "c1", name: "paneer", Qty: 2, price: 12.97 },
+    { id: "c3", name: "paneer masal", Qty: 3, price: 20.97 },
+  ].map((item) => {
+    return <li key={item.id}>{item.name}</li>;
+  });
 
-  function cartItemRemoveHandler(id) {}
-
-  function cartItemAddHandler(item) {}
-
-  const cartItems = (
-    <ul className={classes["cart-items"]}>
-      {cartCtx.items.map((item) => {
-        return (
-          <CartItem
-            key={item.id}
-            name={item.name}
-            amount={item.amount}
-            price={item.price}
-            onRemove={cartItemRemoveHandler.bind(null, item.id)}
-            onAdd={cartItemAddHandler.bind(null, item)}
-          />
-        );
-      })}
-    </ul>
-  );
   return (
-    <Modal onClose={props.onClose}>
-      {cartItems}
+    <Modal>
+      <ul>{cartItems}</ul>
       <div className={classes.total}>
-        <span>Total Amount</span>
-        <span>{totalAmount}</span>
+        <span>Amount: </span>
+        <span>₹ 230 </span>
       </div>
       <div className={classes.actions}>
-        <button className={classes["button--alt"]} onClick={props.onClose}>
-          Close
-        </button>
-        {hasItems && <button className={classes.button}>Order</button>}
+        <button className={classes["button--alt"]}>Close</button>
+        <button className={classes.button}>ORDER</button>
       </div>
     </Modal>
   );
