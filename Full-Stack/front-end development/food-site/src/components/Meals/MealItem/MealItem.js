@@ -8,7 +8,7 @@ const MealItem = (props) => {
       <div className="list-container">
         <h3>{props.name}</h3>
         <div className={classes.description}>{props.description}</div>
-        <div className={classes.rating}>⭐{props.rating}/5</div>
+        <div className={classes.rating}>⭐ {props.rating}/5</div>
         <div className={classes.price}>${props.price.toFixed(2)}</div>
       </div>
       <div>
