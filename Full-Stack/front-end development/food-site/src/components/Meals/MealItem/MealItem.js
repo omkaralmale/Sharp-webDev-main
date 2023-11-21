@@ -4,7 +4,7 @@ import MealItemForm from "./MealItemForm";
 
 const MealItem = (props) => {
   return (
-    <li key={props.key} className={classes.meal}>
+    <li key={props.id} className={classes.meal}>
       <div className="list-container">
         <h3>{props.name}</h3>
         <div className={classes.description}>{props.description}</div>

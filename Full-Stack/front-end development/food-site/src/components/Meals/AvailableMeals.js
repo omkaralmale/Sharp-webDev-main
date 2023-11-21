@@ -178,7 +178,7 @@ const AvailableMeals = () => {
   const MealList = dummyMeals.map((meal) => {
     return (
       <MealItem
-        key={meal.id}
+        id={meal.id}
         name={meal.foodName}
         description={meal.description}
         rating={meal.rating}

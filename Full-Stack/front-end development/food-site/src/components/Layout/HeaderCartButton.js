@@ -3,7 +3,7 @@ import CartIcon from "../Cart/CartIcon";
 import classes from "./HeaderCartButton.module.css";
 
 const HeaderCartButton = () => {
-  const Count = 0;
+  const Count = 10;
   return (
     <button className={classes.button}>
       <span className={classes.icon}>

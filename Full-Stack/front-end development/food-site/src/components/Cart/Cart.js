@@ -8,12 +8,12 @@ export default function Cart(props) {
     { id: "c1", name: "paneer", Qty: 2, price: 12.97 },
     { id: "c3", name: "paneer masal", Qty: 3, price: 20.97 },
   ].map((item) => {
-    return <li key={item.id}>{item.name}</li>;
+    return <li key={item.id}> {item.name}</li>;
   });
 
   return (
     <Modal>
-      <ul>{cartItems}</ul>
+      <ol> {cartItems}</ol>
       <div className={classes.total}>
         <span>Amount: </span>
         <span>₹ 230 </span>

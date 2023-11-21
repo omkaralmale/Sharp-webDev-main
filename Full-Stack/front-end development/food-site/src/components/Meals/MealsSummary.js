@@ -11,8 +11,12 @@ const MealsSummery = () => {
         alongside quick bites like burgers 🍔, fries 🍟, and pizzas 🍕—all
         bursting with flavor. Customize your order effortlessly, experience
         seamless service 🛒, and relish top-quality, fresh ingredients in every
-        dish. 🌟 Join our community for exclusive deals and tips. Discover the
-        perfect fusion of green and fast food—only at GreenBite! 🥬🍔🥗🍕🥙
+        dish.
+      </p>
+      <p>
+        {" "}
+        🌟 Join our community for exclusive deals and tips. Discover the perfect
+        fusion of green and fast food—only at GreenBite! 🥬🍔🥗🍕🥙
       </p>
     </section>
   );
