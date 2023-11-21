@@ -12,14 +12,16 @@ export default function Cart(props) {
   });
 
   return (
-    <Modal>
+    <Modal onCloseCart={props.onClose}>
       <ol> {cartItems}</ol>
       <div className={classes.total}>
         <span>Amount: </span>
         <span>₹ 230 </span>
       </div>
       <div className={classes.actions}>
-        <button className={classes["button--alt"]}>Close</button>
+        <button className={classes["button--alt"]} onClick={props.onClose}>
+          Close
+        </button>
         <button className={classes.button}>ORDER</button>
       </div>
     </Modal>

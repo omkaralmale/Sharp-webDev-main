@@ -3,13 +3,13 @@ import bg from "../../assets/tc-food.jpg";
 import classes from "./Header.module.css";
 import HeaderCartButton from "./HeaderCartButton";
 
-const Header = () => {
+const Header = (props) => {
   return (
     <Fragment>
       <header className={classes.header}>
         <h1>GreenBite</h1>
         <div className="sub-div">
-          <HeaderCartButton />
+          <HeaderCartButton onClickCart={props.onClickBadge} />
         </div>
       </header>
       <div className=".main-image">
