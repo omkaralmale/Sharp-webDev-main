@@ -5,7 +5,7 @@ import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
 
-// email reducer function
+//! email reducer function
 function emailReducer(state, action) {
   if (action.type === "USER_INPUT") {
     return { value: action.val, isValid: action.val.includes("@") };
@@ -30,10 +30,10 @@ function passwordReducer(state, action) {
 //! college reducer function
 function collegeReducer(state, action) {
   if (action.type === "USER_INPUT") {
-    return { value: action.val, isValid: action.val.trim().length > 1 };
+    return { value: action.val, isValid: action.val.trim().length > 5 };
   }
   if (action.type === "INPUT_BLUR") {
-    return { value: state.value, isValid: state.value.trim().length > 1 };
+    return { value: state.value, isValid: state.value.trim().length > 5 };
   }
   return { value: "", isValid: false };
 }
@@ -65,7 +65,7 @@ const Login = (props) => {
   const collegeChangeHandler = (event) => {
     // setEnteredEmail(event.target.value);
     dispatchCollege({ type: "USER_INPUT", val: event.target.value });
-    setFormIsValid(collegeState.isValid && passwordState.isValid);
+    setFormIsValid(collegeState.isValid && emailState.isValid);
   };
 
   const passwordChangeHandler = (event) => {
