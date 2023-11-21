@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <Fragment>
       <header className={classes.header}>
-        <h1>Healthy Meal</h1>
+        <h1>GreenBite</h1>
         <div className="sub-div">
           <HeaderCartButton />
         </div>
