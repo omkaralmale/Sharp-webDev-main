@@ -4,7 +4,6 @@
   margin: 1rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid #ccc;
-  align-items: center;
 }
 
 .meal h3 {
@@ -16,12 +15,8 @@
 }
 
 .price {
-  display: inline-block;
   margin-top: 0.25rem;
-  font-weight: bolder;
-  color: brown;
-  font-size: 1.5rem;
-}
-h3 {
-  text-decoration: 2px solid black underline;
+  font-weight: bold;
+  color: #ad5502;
+  font-size: 1.25rem;
 }

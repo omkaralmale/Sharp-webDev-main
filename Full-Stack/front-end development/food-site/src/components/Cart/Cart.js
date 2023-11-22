@@ -1,29 +1,54 @@
-/* eslint-disable no-unused-vars */
-import React from "react";
-import classes from "./Cart.module.css";
-import Modal from "../UI/Modal.js";
+import { useContext } from 'react';
 
-export default function Cart(props) {
-  const cartItems = [
-    { id: "c1", name: "paneer", Qty: 2, price: 12.97 },
-    { id: "c3", name: "paneer masal", Qty: 3, price: 20.97 },
-  ].map((item) => {
-    return <li key={item.id}> {item.name}</li>;
-  });
+import Modal from '../UI/Modal';
+import CartItem from './CartItem';
+import classes from './Cart.module.css';
+import CartContext from '../../store/cart-context';
+
+const Cart = (props) => {
+  const cartCtx = useContext(CartContext);
+
+  const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
+  const hasItems = cartCtx.items.length > 0;
+
+  const cartItemRemoveHandler = (id) => {
+    cartCtx.removeItem(id);
+  };
+
+  const cartItemAddHandler = (item) => {
+    cartCtx.addItem({ ...item, amount: 1 });
+  };
+
+  const cartItems = (
+    <ul className={classes['cart-items']}>
+      {cartCtx.items.map((item) => (
+        <CartItem
+          key={item.id}
+          name={item.name}
+          amount={item.amount}
+          price={item.price}
+          onRemove={cartItemRemoveHandler.bind(null, item.id)}
+          onAdd={cartItemAddHandler.bind(null, item)}
+        />
+      ))}
+    </ul>
+  );
 
   return (
-    <Modal onCloseCart={props.onClose}>
-      <ol> {cartItems}</ol>
+    <Modal onClose={props.onClose}>
+      {cartItems}
       <div className={classes.total}>
-        <span>Amount: </span>
-        <span>₹ 230 </span>
+        <span>Total Amount</span>
+        <span>{totalAmount}</span>
       </div>
       <div className={classes.actions}>
-        <button className={classes["button--alt"]} onClick={props.onClose}>
+        <button className={classes['button--alt']} onClick={props.onClose}>
           Close
         </button>
-        <button className={classes.button}>ORDER</button>
+        {hasItems && <button className={classes.button}>Order</button>}
       </div>
     </Modal>
   );
-}
+};
+
+export default Cart;

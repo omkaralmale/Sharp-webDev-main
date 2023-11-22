@@ -1,25 +1,19 @@
-import React from "react";
-import classes from "./MealsSummary.module.css";
+import classes from './MealsSummary.module.css';
 
-const MealsSummery = () => {
+const MealsSummary = () => {
   return (
     <section className={classes.summary}>
-      <h2>Welcome</h2>
+      <h2>Delicious Food, Delivered To You</h2>
       <p>
-        🌿 Welcome to GreenBite—where healthy meets fast and deliciously! Enjoy
-        our vibrant salads 🥗, nourishing bowls 🍲, and organic wraps 🌯
-        alongside quick bites like burgers 🍔, fries 🍟, and pizzas 🍕—all
-        bursting with flavor. Customize your order effortlessly, experience
-        seamless service 🛒, and relish top-quality, fresh ingredients in every
-        dish.
+        Choose your favorite meal from our broad selection of available meals
+        and enjoy a delicious lunch or dinner at home.
       </p>
       <p>
-        {" "}
-        🌟 Join our community for exclusive deals and tips. Discover the perfect
-        fusion of green and fast food—only at GreenBite! 🥬🍔🥗🍕🥙
+        All our meals are cooked with high-quality ingredients, just-in-time and
+        of course by experienced chefs!
       </p>
     </section>
   );
 };
 
-export default MealsSummery;
+export default MealsSummary;
